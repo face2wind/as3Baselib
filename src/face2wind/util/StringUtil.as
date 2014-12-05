@@ -351,17 +351,34 @@ package face2wind.util
 		 */		
 		public static function reverse(str:String):String
 		{
-			var strArr:Array = [];
-			for(var i:int = 0;i < str.length;i++)
-			{
-				strArr.push(str.charAt(i));
-			}
+//			var strArr:Array = [];
+//			for(var i:int = 0;i < str.length;i++)
+//			{
+//				strArr.push(str.charAt(i));
+//			}
+//			var result:String = "";
+//			while(strArr.length > 0)
+//			{
+//				result += strArr.pop();
+//			}
 			var result:String = "";
-			while(strArr.length > 0)
-			{
-				result += strArr.pop();
-			}
+			for(var i:int = str.length-1; i > -1; i--)
+				result += str.charAt(i);
 			return result;
+		}
+		
+		/**
+		 * 转换成每个字符一行 （竖向排列）
+		 * @param srcStr
+		 * @return 
+		 */		
+		public static function toVertical(srcStr:String):String
+		{
+			var len:int = srcStr.length;
+			var newStr:String = "";
+			for (var i:int = 0; i < len; i++) 
+				newStr = newStr + srcStr.charAt(i) + "\n";
+			return newStr;
 		}
 		
 	}
