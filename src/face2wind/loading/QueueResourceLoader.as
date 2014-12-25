@@ -27,6 +27,10 @@ package face2wind.loading
 		 */	
 		public static const ALL_LOAD_COMPLETE:String = "QueueResourceLoader_ALL_LOAD_COMPLETE";
 		
+		/**
+		 * 队列加载器 - 依赖于RuntimeResourceManager
+		 * @author face2wind
+		 */
 		public function QueueResourceLoader()
 		{
 			super();

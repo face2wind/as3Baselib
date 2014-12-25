@@ -75,7 +75,7 @@ package face2wind.net
 		{
 			var cmd:int = data.readUnsignedShort(); // 读取2字节的协议号
 			var scmd:* = unpackData("SC"+cmd, data);
-			Debuger.show(Debuger.SOCKET, "Receive Socket SC"+cmd+" , Size : "+data.length+" byte  ((((((((((((((((((((((((((((((((((((((((((");
+			Debuger.show(Debuger.SOCKET, "Receive Socket SC"+cmd+" , Size : "+(data.length-2)+" byte  ((((((((((((((((((((((((((((((((((((((((((");
 			var cmdSocketListenerList:Array = cmdSocketListenerDic[cmd];
 			for (var i:int = 0; i < cmdSocketListenerList.length; i++) 
 			{
@@ -103,7 +103,7 @@ package face2wind.net
 			bytes.endian = endian;
 			bytes.writeShort(cmd);
 			bytes.writeBytes( packData("CS"+cmd, data) );
-			Debuger.show(Debuger.SOCKET, "Send Socket CS"+cmd+" , Size : "+bytes.length+" byte  >>>>>>>>>>>>>>>>>>>>>");
+			Debuger.show(Debuger.SOCKET, "Send Socket CS"+cmd+" , Size : "+(bytes.length-2)+" byte  >>>>>>>>>>>>>>>>>>>>>");
 			sendBytesData(bytes);
 		}
 		

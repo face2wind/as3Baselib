@@ -161,7 +161,7 @@ package face2wind.net
 			_serverPort = port;
 			listeningEvent = true;
 			_socket.connect(_serverIP, _serverPort);
-			Debuger.show(Debuger.SOCKET,"Socket try to connect");
+			Debuger.show(Debuger.SOCKET,"Socket try to connect - " + _serverIP + " : " + _serverPort);
 		}
 		
 		/**
@@ -174,7 +174,7 @@ package face2wind.net
 			
 			listeningEvent = true;
 			_socket.connect(_serverIP, _serverPort);
-			Debuger.show(Debuger.SOCKET,"Socket try to reconnect");
+			Debuger.show(Debuger.SOCKET,"Socket try to reconnect - " + _serverIP + " : " + _serverPort);
 		}
 		
 		/**
