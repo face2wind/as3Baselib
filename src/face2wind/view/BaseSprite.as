@@ -1,6 +1,7 @@
 package face2wind.view
 {	
 	
+	import face2wind.manager.EnterFrameUtil;
 	import face2wind.manager.EventManager;
 	import face2wind.manager.FiltersManager;
 	import face2wind.manager.ReleaseableManager;
@@ -143,7 +144,8 @@ package face2wind.view
 		protected function propertyChange():void
 		{
 			if(initialized)
-				update();
+				EnterFrameUtil.delayCall(1,update);
+//				update();
 		}
 		
 		/**
@@ -357,10 +359,10 @@ package face2wind.view
 		}
 		
 		/**
-		 *  删除所有子对象
-		 * 
-		 */		
-		public function removeAllChildren():void
+		 * 删除所有子对象 
+		 * @param reuse 是否把对象缓存到对象池
+		 */			
+		public function removeAllChildren(reuse:Boolean = false):void
 		{
 			while(0 < numChildren)
 				this.removeChildAt(0);
