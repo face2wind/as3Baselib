@@ -77,6 +77,8 @@ package face2wind.net
 			var scmd:* = unpackData("SC"+cmd, data);
 			Debuger.show(Debuger.SOCKET, "Receive Socket SC"+cmd+" , Size : "+(data.length-2)+" byte  ((((((((((((((((((((((((((((((((((((((((((");
 			var cmdSocketListenerList:Array = cmdSocketListenerDic[cmd];
+			if(null == cmdSocketListenerList)
+				return;
 			for (var i:int = 0; i < cmdSocketListenerList.length; i++) 
 			{
 				var handler:Function = cmdSocketListenerList[i] as Function;
@@ -157,6 +159,8 @@ package face2wind.net
 			
 			var byteArray:ByteArray=new ByteArray();
 			byteArray.endian = endian;
+			if(null == cmdObject)
+				return byteArray;
 			var tmpBytearray:ByteArray;
 			var attributes:Array = cmdMap.getCMDAttributes(className);
 			for each (var attribute:Object in attributes)
