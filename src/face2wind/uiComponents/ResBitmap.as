@@ -2,6 +2,7 @@ package face2wind.uiComponents
 {
 	import face2wind.lib.Reflection;
 	import face2wind.loading.RuntimeResourceManager;
+	import face2wind.manager.StageManager;
 	import face2wind.view.item.IReleaseable;
 	
 	import flash.display.Bitmap;
@@ -155,6 +156,26 @@ package face2wind.uiComponents
 			y = ypos;
 		}
 		
+		private var _fixWidth:Number = 0;
+		private var _fixHeight:Number = 0;
+		/**
+		 * 等比缩放，尽量满屏，并且不超出屏幕 
+		 * @param _width
+		 * @param _width
+		 */		
+		public function scaleFixToWidthAndHeight(_width:Number = 0,_height:Number = 0):void
+		{
+			if(0 == _width)
+				_width = StageManager.getInstance().stageWidth;
+			if(0 == _height)
+				_height = StageManager.getInstance().stageHeight;
+			_fixWidth = _width;
+			_fixHeight = _height;
+			isEqualResize = true;
+			
+			resizeWithScale();
+		}
+		
 		/**
 		 * 等比缩放到指定宽度 
 		 * @param _width
@@ -220,7 +241,15 @@ package face2wind.uiComponents
 		{
 			if(null == bitmapData)
 				return;
-			
+			if(0 != _fixHeight && 0 != _fixWidth){
+				if( (bitmapData.width/bitmapData.height) < (_fixWidth/_fixHeight) ){
+					targetWidth = 0;
+					targetHeight = _fixHeight;
+				}else{
+					targetWidth = _fixWidth;
+					targetHeight = 0;
+				}
+			}
 			var bmW:Number = super.bitmapData.width;
 			var bmH:Number = super.bitmapData.height;
 			if(isEqualResize)
@@ -235,6 +264,7 @@ package face2wind.uiComponents
 					width = bmW*rate;
 					height = bmH*rate;
 				}
+				isEqualResize = true; // 保持这个值为true，因为设置width跟height时会被改变
 			}
 			else
 			{

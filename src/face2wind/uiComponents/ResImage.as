@@ -15,7 +15,7 @@ package face2wind.uiComponents
 		/**
 		 * 存放图片的实体
 		 */		
-		private var resbm:ResBitmap;
+		protected var resbm:ResBitmap;
 		
 		/**
 		 * ResImage构造函数
@@ -63,9 +63,19 @@ package face2wind.uiComponents
 		 * 加载成功，把resbitmap加载成功的事件抛出去
 		 * @param url
 		 */
-		private function loadCompleteHandler(e:Event):void
+		protected function loadCompleteHandler(e:Event):void
 		{
 			dispatchEvent(new Event(Event.COMPLETE));
+		}
+		
+		/**
+		 * 等比缩放，尽量满屏，并且不超出屏幕 
+		 * @param _width
+		 * @param _width
+		 */		
+		public function scaleFixToWidthAndHeight(_width:Number = 0,_height:Number = 0):void
+		{
+			resbm.scaleFixToWidthAndHeight(_width,_height);
 		}
 		
 		/**
@@ -108,6 +118,36 @@ package face2wind.uiComponents
 			
 			resbm.source = _source;
 			addChild(resbm);
+		}
+		
+		
+		/**
+		 * 重写高度设置（素材为加载则暂高度度值，等加载完毕再设置） <br/>
+		 * 此属性和缩放属性是互斥，设置了这个，缩放属性会失效
+		 * @param value
+		 * 
+		 */		
+		public override function get width():Number
+		{
+			if(resbm)
+				return resbm.width;
+			else
+				return 0;
+		}
+		
+		
+		/**
+		 * 重写高度设置（素材为加载则暂高度度值，等加载完毕再设置） <br/>
+		 * 此属性和缩放属性是互斥，设置了这个，缩放属性会失效
+		 * @param value
+		 * 
+		 */		
+		public override function get height():Number
+		{
+			if(resbm)
+				return resbm.width;
+			else
+				return 0;
 		}
 		
 		/**
